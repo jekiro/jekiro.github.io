@@ -20,7 +20,7 @@
 
 title: Reversing Blog
 masthead_title: " "
-logo: "/assets/images/pfp.png"
+logo: "/assets/images/test.png"
 email: birdsarentrealctf@gmail.com
 description: Reverse engineer, security researcher, pentester and OSCP
 baseurl: "" # the subpath of your site, e.g. /blog
