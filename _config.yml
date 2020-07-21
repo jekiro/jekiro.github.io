@@ -20,7 +20,7 @@
 
 title: Reversing Blog
 masthead_title: " "
-logo: "/assets/images/birdsarentrealctf.png"
+logo: "/assets/images/pfp.png"
 email: birdsarentrealctf@gmail.com
 description: Reverse engineer, security researcher, pentester and OSCP
 baseurl: "" # the subpath of your site, e.g. /blog
@@ -49,7 +49,7 @@ timezone: "America/New York"
 
 author:
   name     : "OEP"
-  avatar   : "/assets/images/logo.png"
+  avatar   : "/assets/images/pfp.png"
   bio      : "Reverse Engineer <br>HackTheBox Guru <br>OSCP"
   location : "United States"
   links  :
