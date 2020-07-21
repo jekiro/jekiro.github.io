@@ -45,12 +45,12 @@ search: true
 paginate: 8
 paginate_path: /page:num/
 
-timezone: "America/Los Angeles"
+timezone: "America/New York"
 
 author:
-  name     : "BirdsArentReal"
+  name     : "OEP"
   avatar   : "/assets/images/logo.png"
-  bio      : "Reverse Engineer <br>HackTheBox Guru <br>OSCP <script>alert('test')</script>"
+  bio      : "Reverse Engineer <br>HackTheBox Guru <br>OSCP"
   location : "United States"
   links  :
     - label: "Twitter"
