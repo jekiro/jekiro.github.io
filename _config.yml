@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Jekiro/Zori
+title: Reversing Blog
 masthead_title: " "
 logo: "/assets/images/birdsarentrealctf.png"
 email: birdsarentrealctf@gmail.com
