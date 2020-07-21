@@ -50,18 +50,18 @@ timezone: "America/Los Angeles"
 author:
   name     : "BirdsArentReal"
   avatar   : "/assets/images/logo.png"
-  bio      : "Reverse Engineer <br>HackTheBox Top 5 Team"
+  bio      : "Reverse Engineer <br>HackTheBox Guru <br>OSCP <script>alert('test')</script>"
   location : "United States"
   links  :
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/AlbytrossCTF"
+      url: "https://twitter.com/youreafed"
     - label: "Github"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/BirdsArentRealCTF"
+      url: "https://github.com/jekiro"
     - label: "HackTheBox"
       icon: "fas fa-cube"
-      url: "https://www.hackthebox.eu/teams/profile/1709"
+      url: "https://www.hackthebox.eu/home/users/profile/121650"
 
 defaults:
   # _posts
