@@ -204,7 +204,7 @@ _ _ _ _ _ _ _ _
 _ _ _ _ _ _ _ _
 _ _ _ _ K _ _ R
 ```
-![](/assets/OEP/chezzz/flag.PNG)
+![](/content/OEP/chezzz/flag.PNG)
 
 ### Credits
 
