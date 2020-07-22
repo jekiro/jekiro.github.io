@@ -28,7 +28,7 @@ So let's look at it in a disassembler, which my choice was IDA although you coul
 
 **_PUT STUFF HERE_**
 
-The first function called initializes what is most likely the board in a nested for loop. Pseudo code for this would be 
+The first function called initializes what is most likely the board in a nested for loop. Pseudo code for this with some stuff missing for the sake of the writeup would be
 ```C
 for(int i = 7; i >= 0; --i) {
     for(int j = 7; j >= 0; --j) {
