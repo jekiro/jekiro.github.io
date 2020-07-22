@@ -67,7 +67,7 @@ This isn't being detected by IDA so you can create a manual definition for a swi
 
 The 6 different cases are not obvious as to what they do so at this point I decided to get information from dynamically analysing the binary rather than going through and guessing what the structures may be.
 
-## Filling missing knowledge with Dynamic Analysis
+## Filling missing information with Dynamic Analysis
 
 From the information gathered in the previous section, and the knowledge of a large section of memory on the stack that is most likely the chess board structure, run the program in gdb and breakpoint somewhere when rax gets set as a pointer to the board. Without ASLR on, a command for that in GDB is  
 **break *(0x555555554000+0x1BA6)**  
