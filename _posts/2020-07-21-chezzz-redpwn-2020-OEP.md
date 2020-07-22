@@ -9,7 +9,7 @@ excerpt: "Chezzz was a reversing challenge in the redpwn 2020 CTF that involved 
 ### Challenge Information
 
 Challenge: chezzzboard  
-Created by: dns  
+Created by: dns
 >I'll also give you the flag if you beat me in chess  
 >nc 2020.redpwnc.tf 31611
 
