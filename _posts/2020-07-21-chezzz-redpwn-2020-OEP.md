@@ -41,14 +41,18 @@ for(int i = 7; i >= 0; --i) {
 
 ![](/content/OEP/chezzz/sub_2b5a.PNG)
 
-After main initializes the board with the function above, it ends up calling the function shown below which has an initialization function with another nested for loop at sub_12B8 so 
-we can ignore 12B8 somewhat, and also calls a bigger function that is at 159A. As you may also notice rax gets moved into rdi for every function called and in the main function it points to an allocated structure on the stack of size 0x404 or so. That will be useful knowledge to come to understand how the binary works. 
+After main initializes the board with the function above, it ends up calling the function shown below which has an initialization function with another nested for loop at **sub_12B8** so 
+we can ignore 12B8 somewhat, and also calls a bigger function that is at 159A. As you may also notice rax gets moved into rdi for every function called and in the main function it points to an allocated structure on the stack of size 0x408 or so. That will be useful knowledge to come to understand how the binary works. 
 
 ![](/content/OEP/chezzz/sub_1b8a.PNG)
 
-Looking at sub_159A it is pretty obvious that it is doing most of the handling for the chess board just from the size. 
+Looking at **sub_159A** it is pretty obvious that it is doing most of the handling for the chess board just from the size. 
 
 ![](/content/OEP/chezzz/sub_159a_graph.PNG)
+
+One of the very first things that caught my eye while stepping back and looking at sub_159A was the call to **system**.
+
+![](/content/OEP/chezzz/sub_159a_system.PNG)
 
 
 ## Gathering information from Dynamic Analysis
