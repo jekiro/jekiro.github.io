@@ -69,7 +69,8 @@ The 6 different cases are not obvious as to what they do so at this point I deci
 
 ## Filling missing knowledge with Dynamic Analysis
 
-From the information gathered in the previous section, and the knowledge of a large section of memory on the stack that is most likely the chess board structure, run the program in gdb and breakpoint somewhere when rax gets set as a pointer to the board. Without ASLR on, a command for that in GDB is **break *(0x555555554000+0x1BA6)**  
+From the information gathered in the previous section, and the knowledge of a large section of memory on the stack that is most likely the chess board structure, run the program in gdb and breakpoint somewhere when rax gets set as a pointer to the board. Without ASLR on, a command for that in GDB is  
+**break *(0x555555554000+0x1BA6)**  
 
 After breaking and locating the address, since we know the size of the structure you can easily print out the hex with the GDB command x/128xg where 128 is the number of 8 byte hex values to print from the address passed. 
 
