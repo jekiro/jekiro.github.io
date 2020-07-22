@@ -24,7 +24,7 @@ Running the binary we can see it opens a chess board in the terminal and using t
 
 ![](/content/OEP/chezzz/board.PNG)
 
-
+So let's look at it in a disassembler, which my choice was IDA although you could use any. 
 
 ## Gathering information from Dynamic Analysis
 
