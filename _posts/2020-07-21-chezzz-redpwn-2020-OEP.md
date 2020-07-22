@@ -54,12 +54,18 @@ While a function that is big and has calls to other functions might seem dauntin
 
 ![](/content/OEP/chezzz/sub_159a_system.PNG)
 
-Tracing the system calls backwards shows it depends on the returning value from **sub_2792** equaling **467**. 
+Tracing the system calls backwards shows it depends on the returning value from **sub_2792** equaling **467** so rename 2792 to **f_checkwin** to make it more understandable.
 
 ![](/content/OEP/chezzz/sub_159a_2792.PNG)
 
+The win check function has a jump table that leads to different code blocks depending on the return of the function **sub_1272**.  
+This isn't being detected by IDA so you can create a manual definition for a switch idiom by clicking where it starts which is the ja instruction for this example and setting the values correctly.
 
-## Gathering information from Dynamic Analysis
+![](/content/OEP/chezzz/win_ex.PNG)
+
+![](/content/OEP/chezzz/win_switch.PNG)
+
+## Filling missing knowledge with Dynamic Analysis
 
 From the information gathered in the previous section, 
 
