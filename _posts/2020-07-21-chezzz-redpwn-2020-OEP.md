@@ -65,6 +65,8 @@ This isn't being detected by IDA so you can create a manual definition for a swi
 
 ![](/content/OEP/chezzz/win_switch.PNG)
 
+The 6 different cases are not obvious as to what they do so at this point I decided to get information from dynamically analysing the binary rather than going through and guessing what the structures may be.
+
 ## Filling missing knowledge with Dynamic Analysis
 
 From the information gathered in the previous section, 
