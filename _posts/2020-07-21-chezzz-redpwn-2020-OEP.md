@@ -1,9 +1,9 @@
 ---
 layout: single
-title: "redpwn-2020 chezzz writeup"
+title: "redpwn-2020 chezzzboard writeup"
 header:
   teaser: /assets/images/teasers/mango.png
-excerpt: "Chezzz was a reversing challenge in the redpwn 2020 CTF that involved z3 to solve math issues."
+excerpt: "Chezzzboard was a reversing challenge in the redpwn 2020 CTF that involved z3 to solve math problems."
 ---
 
 ### Challenge Information
