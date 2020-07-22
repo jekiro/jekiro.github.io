@@ -25,9 +25,9 @@ Beginning research on the binary, by checking the filetype makes it pretty obvio
 
 >chezzz: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2
 
-Running the binary we can see it opens a chess board in the terminal and using the format to move of #L, where # is a number and L is the capital letter to signify the column.
+Running the binary we can see it opens a chess board in the terminal and using the format to move of #L, where # is a number and L is the capital letter to signify the column such as 2B.
 
-![](/content/OEP/chezzz-redpwn-2020/board.png)
+![](/content/OEP/chezzz/board.PNG)
 
 
 
