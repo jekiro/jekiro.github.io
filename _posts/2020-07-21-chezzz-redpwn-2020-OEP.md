@@ -114,6 +114,77 @@ After breaking and locating the address, since we know the size of the structure
 0x7fffffffe1b0:	0x0000000100000004	0x0000000700000007
 ```
 
+The patterns are pretty obvious to see, but for example this is the layout I noticed.
+
+```
+0x7fffffffe190:	0x00000001(side)00000002(piece_type)	0x00000005(position_x)00000007(position_y)
+```
+
+With a structure laid out and known we can create a struct in the local types view for IDA, and my structures are as seen below.
+
+```cpp
+struct struct_piece
+{
+  _DWORD piece_type;
+  _DWORD piece_side;
+  _DWORD x_axis;
+  _DWORD y_axis;
+};
+
+struct struct_board
+{
+  struct_piece spots[64];
+  _DWORD whosturn;
+};
+```
+
+board->whosturn is used to figure out which side's turn it is, and is toggled between 1 and 0 during the execution of the program whenever a turn is finished.  
+
+Now that a structure is laid out in IDA, any time the board is used it will show a more relevant and understandable piece of information in the decompiler as long as you set the var type.  
+The checkwin function makes more sense here, both the get_piece_type and get_piece_side functions are simple functions that just retrieve the type or side from the piece. And the piece type is used to determine what calculation to do based on the position on the board for that specific piece type. I took the liberty of commenting what the functions do as they are simple and it would be tedious, feel free to download and look into it if you need to.
+```cpp
+__int64 __fastcall f_checkwin(struct_board *board)
+{
+  unsigned int type; // ST28_4
+  unsigned int needtobe467; // [rsp+1Ch] [rbp-14h]
+  signed int i; // [rsp+20h] [rbp-10h]
+  signed int j; // [rsp+24h] [rbp-Ch]
+
+  needtobe467 = 0;
+  for ( i = 0; i <= 7; ++i )
+  {
+    for ( j = 0; j <= 7; ++j )
+    {
+      type = get_piece_type(&board->spots[8LL * i + j]);
+      get_piece_side(&board->spots[8LL * i + j]);
+      switch ( (unsigned __int64)type )
+      {
+        case 0uLL:
+          needtobe467 += add_2_3((__int64)board, 8 - i, j + 9);// var_2 + var_3
+          break;
+        case 1uLL:
+          needtobe467 += mul_2_3((__int64)board, 8 - i, j + 9);// var_2 * var_3
+          break;
+        case 2uLL:
+          needtobe467 += mul_double_2_3((__int64)board, 8 - i, j + 9);// 2*(var_2+var_3)
+          break;
+        case 3uLL:
+          needtobe467 += mod_3_2((__int64)board, 8 - i, j + 9);// var_3 % var_2
+          break;
+        case 4uLL:
+          needtobe467 += sub_2760((__int64)board, 8 - i, j + 9);// 256 - var_2 - var_3
+          break;
+        case 5uLL:
+          needtobe467 += subt_2_3((__int64)board, 8 - i, j + 9);// var_2 - var_3
+          break;
+        default:
+          continue;
+      }
+    }
+  }
+  return needtobe467;
+}
+```
 ## Creating a Z3 script to calculate a correct path
 
 Knowing the path to win, and the mathematical requirements.
