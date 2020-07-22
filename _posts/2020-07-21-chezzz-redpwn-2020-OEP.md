@@ -16,7 +16,7 @@ Files: [chezzz](/assets/files/chezzz)
 
 ## Basic Research and Static Analysis
 
-Beginning research on the binary, by checking the filetype makes it pretty obvious it's a 64 bit ELF executable.  
+Beginning research on the binary, by checking the filetype it's pretty obvious that it's a 64 bit ELF executable.  
 
 >chezzz: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2
 
