@@ -24,7 +24,20 @@ Running the binary we can see it opens a chess board in the terminal and using t
 
 ![](/content/OEP/chezzz/board.PNG)
 
-So let's look at it in a disassembler, which my choice was IDA although you could use any. 
+So let's look at it in a disassembler, which my choice was IDA although you could use any.  
+
+**_PUT STUFF HERE_**
+
+The first function called initializes what is most likely the board in a nested for loop. Pseudo code for this would be 
+```C
+for(int i = 7; i >= 0; --i) {
+    for(int j = 7; j >= 0; --j) {
+        init_board_2(r14);
+    }
+}
+```
+
+![](/content/OEP/chezzz/sub_2b5a.PNG)
 
 ## Gathering information from Dynamic Analysis
 
