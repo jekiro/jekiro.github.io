@@ -27,7 +27,7 @@ Beginning research on the binary, by checking the filetype makes it pretty obvio
 
 Running the binary we can see it opens a chess board in the terminal and using the format to move of #L, where # is a number and L is the capital letter to signify the column.
 
-![](/content/oep/chezzz/board.png)
+![](/content/OEP/chezzz-redpwn-2020/board.png)
 
 
 
