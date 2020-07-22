@@ -6,6 +6,16 @@ header:
 excerpt: "Chezzz was a reversing challenge in the redpwn 2020 CTF that involved z3 to solve math issues."
 ---
 
+### Challenge Information
+
+Challenge: chezzzboard  
+Created by: dns  
+
+I'll also give you the flag if you beat me in chess  
+nc 2020.redpwnc.tf 31611
+
+Files: [LINK FILE HERE](/assets/files/chezzz)
+
 ## Basic Research and Static Analysis
 
 ```go
