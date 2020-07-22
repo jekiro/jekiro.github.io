@@ -54,7 +54,7 @@ While a function that is large, and has calls to other functions might seem daun
 
 ![](/content/OEP/chezzz/sub_159a_system.PNG)
 
-Tracing the system call backwards shows it depends on the returning value from **sub_2792** equaling **467** so rename 2792 to **f_checkwin** to make it more understandable.
+Tracing the system call backwards shows it depends on the returning value from **sub_2792** equaling **467**. I renamed 2792 to **f_checkwin** to make it more understandable.
 
 ![](/content/OEP/chezzz/sub_159a_2792.PNG)
 
