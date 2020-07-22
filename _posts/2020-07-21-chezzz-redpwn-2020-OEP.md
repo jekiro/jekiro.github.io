@@ -10,7 +10,7 @@ excerpt: "Chezzzboard was a reversing challenge in the redpwn 2020 CTF that invo
 
 Challenge: chezzzboard  
 Created by: dns  
-Files: [LINK FILE HERE](/assets/files/chezzz)
+Files: [chezzz(not uploaded yet)](/assets/files/chezzz)
 >I'll also give you the flag if you beat me in chess  
 >nc 2020.redpwnc.tf 31611
 
