@@ -50,7 +50,7 @@ Looking at **sub_159A** it is pretty obvious that it is doing most of the handli
 
 ![](/content/OEP/chezzz/sub_159a_graph.PNG)
 
-While a function that is big and has calls to other functions might seem daunting, looking through it slowly one of the very first things that caught my eye was the call to **system**.
+While a function that is large, and has calls to other functions might seem daunting, looking through it slowly one of the very first things that caught my eye was the call to **system**.
 
 ![](/content/OEP/chezzz/sub_159a_system.PNG)
 
