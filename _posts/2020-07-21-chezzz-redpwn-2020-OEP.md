@@ -16,11 +16,6 @@ Files: [chezzz (not uploaded yet)](/assets/files/chezzz)
 
 ## Basic Research and Static Analysis
 
-```go
-var test = "TESTING"
-test3 := 2
-```
-
 Beginning research on the binary, by checking the filetype makes it pretty obvious it's a 64 bit ELF executable.  
 
 >chezzz: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2
