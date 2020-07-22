@@ -26,7 +26,9 @@ Running the binary we can see it opens a chess board in the terminal and using t
 
 So let's look at it in a disassembler, which my choice was IDA although you could use any.  
 
-**_PUT STUFF HERE_**
+![](/content/OEP/chezzz/cppmain.PNG)
+
+The main function makes it quite obvious that it's a C++ binary which has quirks that you need to know if you want to fully understand it but that isn't in the scope of this writeup.  
 
 The first function called initializes what is most likely the board in a nested for loop. That can be assumed because the chess board is 8x8 and since arrays always start at 0, the nested for loop is most likely iterating over some sort of structure for the board. Pseudo code for this with some stuff missing for the sake of the writeup would be
 ```cpp
