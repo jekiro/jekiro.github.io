@@ -22,3 +22,15 @@ test3 := 2
 ```
 
 Beginning research on the binary
+
+## Gathering information from Dynamic Analysis
+
+From the information gathered in the previous section, 
+
+## Creating a Z3 script to calculate a correct path
+
+Knowing the path to win, and the mathematical requirements.
+
+### Credits
+
+Credits to my teammate **_kosinw_** for helping with Z3 since I have little experience with it.
