@@ -185,9 +185,26 @@ __int64 __fastcall f_checkwin(struct_board *board)
   return needtobe467;
 }
 ```
+
 ## Creating a Z3 script to calculate a correct path
 
-Knowing the path to win, and the mathematical requirements.
+Knowing the path to win, and the mathematical requirements, I did not want to go through it manually so I enlisted the help of my teammate kosinw for the Z3 side of the challenge. The final script for reference is avaliable [here](/assets/files/chezzz.py). 
+
+It sets up the board with an 8x8 array of integers, limiting the values for each piece to 0 to 6 and restricting the number of existing pieces depending on the settings. It also limits the game by the rules that exist, which for some reason that is just up to the developer, is that kings are unmovable.  
+Then the script implements restrictions for the type of piece and what calculation needs to be done for that specific piece, and restricts it to equal 467.  
+An example from the final script is shown:  
+
+```
+_ _ Q _ K _ _ _
+_ _ _ _ _ _ Q _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ _ K _ _ R
+```
+![](/assets/OEP/chezzz/flag.PNG)
 
 ### Credits
 
