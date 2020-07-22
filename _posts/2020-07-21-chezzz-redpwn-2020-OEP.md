@@ -21,7 +21,15 @@ var test = "TESTING"
 test3 := 2
 ```
 
-Beginning research on the binary
+Beginning research on the binary, by checking the filetype makes it pretty obvious it's a 64 bit ELF executable.  
+
+>chezzz: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=25c612f70c8b72ad9cfd93ef62542c08c94f47e0, for GNU/Linux 3.2.0, stripped
+
+Running the binary we can see it opens a chess board in the terminal and using the format to move of #L, where # is a number and L is the capital letter to signify the column.
+
+![](/content/oep/chezzz/board.png)
+
+
 
 ## Gathering information from Dynamic Analysis
 
