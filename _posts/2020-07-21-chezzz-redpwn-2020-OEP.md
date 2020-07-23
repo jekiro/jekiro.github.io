@@ -42,7 +42,7 @@ for(int i = 7; i >= 0; --i) {
 ![](/content/OEP/chezzz/sub_2b5a.PNG)
 
 After main initializes the board with the function above, it ends up calling the function shown below which has an initialization function with another nested for loop at **sub_12B8** so 
-we can ignore 12B8 somewhat, and also calls a bigger function that is at 159A. As you may also notice rax gets moved into rdi for every function called and in the main function it points to an allocated structure on the stack of size 0x408 or so. That will be useful knowledge to come to understand how the binary works. 
+we can ignore sub_12B8 somewhat, and also calls a bigger function that is at sub_159A. As you may also notice rax gets moved into rdi for every function called and in the main function it points to an allocated structure on the stack of size 0x408 or so. That will be useful knowledge to come to understand how the binary works. 
 
 ![](/content/OEP/chezzz/sub_1b8a.PNG)
 
@@ -54,7 +54,7 @@ While a function that is large, and has calls to other functions might seem daun
 
 ![](/content/OEP/chezzz/sub_159a_system.PNG)
 
-Tracing the system call backwards shows it depends on the returning value from **sub_2792** equaling **467**. I renamed 2792 to **f_checkwin** to make it more understandable.
+Tracing the system call backwards shows it depends on the returning value from **sub_2792** equaling **467 (0x1D3)**. I renamed sub_2792 to **f_checkwin** to make it more understandable.
 
 ![](/content/OEP/chezzz/sub_159a_2792.PNG)
 
@@ -74,50 +74,50 @@ From the information gathered in the previous section, and the knowledge of a la
 
 After breaking and locating the address, since we know the size of the structure you can easily print out the hex with the GDB command x/128xg where 128 is the number of 8 byte hex values to print from the address passed. 
 
->x/128xg 0x7fffffffddc0
+>x/256xw 0x7fffffffdde0
 
 ```
-0x7fffffffddc0:	0x0000000000000004	0x0000000000000000
-0x7fffffffddd0:	0x0000000000000003	0x0000000100000000
-0x7fffffffdde0:	0x0000000000000002	0x0000000200000000
-0x7fffffffddf0:	0x0000000000000001	0x0000000300000000
-0x7fffffffde00:	0x0000000000000000	0x0000000400000000
-0x7fffffffde10:	0x0000000000000002	0x0000000500000000
-0x7fffffffde20:	0x0000000000000003	0x0000000600000000
-0x7fffffffde30:	0x0000000000000004	0x0000000700000000
-0x7fffffffde40:	0x0000000000000005	0x0000000000000001
-0x7fffffffde50:	0x0000000000000005	0x0000000100000001
-0x7fffffffde60:	0x0000000000000005	0x0000000200000001
-0x7fffffffde70:	0x0000000000000005	0x0000000300000001
-0x7fffffffde80:	0x0000000000000005	0x0000000400000001
-0x7fffffffde90:	0x0000000000000005	0x0000000500000001
-0x7fffffffdea0:	0x0000000000000005	0x0000000600000001
-0x7fffffffdeb0:	0x0000000000000005	0x0000000700000001
-0x7fffffffdec0:	0x0000000200000006	0x0000000000000002
+0x7fffffffdde0:	0x00000004	0x00000000	0x00000000	0x00000000
+0x7fffffffddf0:	0x00000003	0x00000000	0x00000000	0x00000001
+0x7fffffffde00:	0x00000002	0x00000000	0x00000000	0x00000002
+0x7fffffffde10:	0x00000001	0x00000000	0x00000000	0x00000003
+0x7fffffffde20:	0x00000000	0x00000000	0x00000000	0x00000004
+0x7fffffffde30:	0x00000002	0x00000000	0x00000000	0x00000005
+0x7fffffffde40:	0x00000003	0x00000000	0x00000000	0x00000006
+0x7fffffffde50:	0x00000004	0x00000000	0x00000000	0x00000007
+0x7fffffffde60:	0x00000005	0x00000000	0x00000001	0x00000000
+0x7fffffffde70:	0x00000005	0x00000000	0x00000001	0x00000001
+0x7fffffffde80:	0x00000005	0x00000000	0x00000001	0x00000002
+0x7fffffffde90:	0x00000005	0x00000000	0x00000001	0x00000003
+0x7fffffffdea0:	0x00000005	0x00000000	0x00000001	0x00000004
+0x7fffffffdeb0:	0x00000005	0x00000000	0x00000001	0x00000005
+0x7fffffffdec0:	0x00000005	0x00000000	0x00000001	0x00000006
+0x7fffffffded0:	0x00000005	0x00000000	0x00000001	0x00000007
+0x7fffffffdee0:	0x00000006	0x00000002	0x00000002	0x00000000
 ...
-0x7fffffffe0b0:	0x0000000200000006	0x0000000700000005
-0x7fffffffe0c0:	0x0000000100000005	0x0000000000000006
-0x7fffffffe0d0:	0x0000000100000005	0x0000000100000006
-0x7fffffffe0e0:	0x0000000100000005	0x0000000200000006
-0x7fffffffe0f0:	0x0000000100000005	0x0000000300000006
-0x7fffffffe100:	0x0000000100000005	0x0000000400000006
-0x7fffffffe110:	0x0000000100000005	0x0000000500000006
-0x7fffffffe120:	0x0000000100000005	0x0000000600000006
-0x7fffffffe130:	0x0000000100000005	0x0000000700000006
-0x7fffffffe140:	0x0000000100000004	0x0000000000000007
-0x7fffffffe150:	0x0000000100000003	0x0000000100000007
-0x7fffffffe160:	0x0000000100000002	0x0000000200000007
-0x7fffffffe170:	0x0000000100000001	0x0000000300000007
-0x7fffffffe180:	0x0000000100000000	0x0000000400000007
-0x7fffffffe190:	0x0000000100000002	0x0000000500000007
-0x7fffffffe1a0:	0x0000000100000003	0x0000000600000007
-0x7fffffffe1b0:	0x0000000100000004	0x0000000700000007
+0x7fffffffe0d0:	0x00000006	0x00000002	0x00000005	0x00000007
+0x7fffffffe0e0:	0x00000005	0x00000001	0x00000006	0x00000000
+0x7fffffffe0f0:	0x00000005	0x00000001	0x00000006	0x00000001
+0x7fffffffe100:	0x00000005	0x00000001	0x00000006	0x00000002
+0x7fffffffe110:	0x00000005	0x00000001	0x00000006	0x00000003
+0x7fffffffe120:	0x00000005	0x00000001	0x00000006	0x00000004
+0x7fffffffe130:	0x00000005	0x00000001	0x00000006	0x00000005
+0x7fffffffe140:	0x00000005	0x00000001	0x00000006	0x00000006
+0x7fffffffe150:	0x00000005	0x00000001	0x00000006	0x00000007
+0x7fffffffe160:	0x00000004	0x00000001	0x00000007	0x00000000
+0x7fffffffe170:	0x00000003	0x00000001	0x00000007	0x00000001
+0x7fffffffe180:	0x00000002	0x00000001	0x00000007	0x00000002
+0x7fffffffe190:	0x00000001	0x00000001	0x00000007	0x00000003
+0x7fffffffe1a0:	0x00000000	0x00000001	0x00000007	0x00000004
+0x7fffffffe1b0:	0x00000002	0x00000001	0x00000007	0x00000005
+0x7fffffffe1c0:	0x00000003	0x00000001	0x00000007	0x00000006
+0x7fffffffe1d0:	0x00000004	0x00000001	0x00000007	0x00000007
 ```
 
 The patterns are pretty obvious to see, but for example this is the layout I noticed.
 
 ```
-0x7fffffffe190:	0x00000001(side)00000002(piece_type)	0x00000005(position_x)00000007(position_y)
+0x7fffffffe130:	0x00000005(piece_type)	0x00000001(side)	0x00000006(position_y)	0x00000005(position_x)
 ```
 
 With a structure laid out and known we can create a struct in the local types view for IDA, and my structures are as seen below.
@@ -127,8 +127,8 @@ struct struct_piece
 {
   _DWORD piece_type;
   _DWORD piece_side;
-  _DWORD x_axis;
   _DWORD y_axis;
+  _DWORD x_axis;
 };
 
 struct struct_board
@@ -192,7 +192,7 @@ Knowing the path to win, and the mathematical requirements, I did not want to go
 
 It sets up the board with an 8x8 array of integers, limiting the values for each piece to 0 to 6 and restricting the number of existing pieces depending on the settings. It also limits the game by the rules that exist, which for some reason that is just up to the developer, is that kings are unmovable.  
 Then the script implements restrictions for the type of piece and what calculation needs to be done for that specific piece, and restricts it to equal 467.  
-An example from the final script is shown:  
+An example from the final script is shown, with all the pieces in place for the required patterns to generate 467:  
 
 ```
 _ _ Q _ K _ _ _
@@ -204,6 +204,9 @@ _ _ _ _ _ _ _ _
 _ _ _ _ _ _ _ _
 _ _ _ _ K _ _ R
 ```
+
+And it works, yielding the flag directly to us.
+
 ![](/content/OEP/chezzz/flag.PNG)
 
 ### Credits
