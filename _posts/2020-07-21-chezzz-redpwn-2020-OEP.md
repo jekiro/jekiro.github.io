@@ -2,7 +2,7 @@
 layout: single
 title: "redpwn-2020 chezzz writeup"
 header:
-  teaser: /assets/images/teasers/mango.png
+  teaser:
 excerpt: "Chezzzboard was a reversing challenge in the redpwn 2020 CTF that involved z3 to solve math problems."
 ---
 
