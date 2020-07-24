@@ -16,7 +16,7 @@ Files: [chezzz](/assets/files/chezzz)
 
 ## Basic Research and Static Analysis
 
-Beginning research on the binary, by checking the filetype it's pretty obvious that it's a 64 bit ELF executable.  
+Beginning research on the binary, by checking the filetype it's pretty obvious that it's a `64 bit ELF executable`.  
 
 >chezzz: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2
 
@@ -50,16 +50,16 @@ Looking at `sub_159A` it is pretty obvious that it is doing most of the handling
 
 ![](/content/OEP/chezzz/sub_159a_graph.PNG)
 
-While a function that is large, and has calls to other functions might seem daunting, looking through it slowly, one of the very first and obvious things that caught my eye was the call to **system**.
+While a function that is large, and has calls to other functions might seem daunting, looking through it slowly, one of the very first and obvious things that caught my eye was the call to `system`.
 
 ![](/content/OEP/chezzz/sub_159a_system.PNG)
 
-Tracing the system call backwards shows it depends on the returning value from **sub_2792** equaling **467 (0x1D3)**. I renamed sub_2792 to **f_checkwin** to make it more understandable.
+Tracing the system call backwards shows it depends on the returning value from `sub_2792` equaling `467 (0x1D3)`. I renamed `sub_2792` to `f_checkwin` to make it more understandable.
 
 ![](/content/OEP/chezzz/sub_159a_2792.PNG)
 
-The win check function has a jump table that leads to different code blocks depending on the return of the function **sub_1272**.  
-This isn't being detected by IDA so you can create a manual definition for a switch idiom by clicking where it starts which is the ja instruction for this example and setting the values correctly.
+The win check function has a jump table that leads to different code blocks depending on the return of the function `sub_1272`.  
+This isn't being detected by IDA so you can create a manual definition for a switch idiom by clicking where it starts which is the `ja` instruction for this example and setting the values correctly.
 
 ![](/content/OEP/chezzz/win_ex.PNG)
 
@@ -69,10 +69,10 @@ The 6 different cases are not obvious as to what they do so at this point I deci
 
 ## Filling missing information with Dynamic Analysis
 
-From the information gathered in the previous section, and the knowledge of a large section of memory on the stack that is most likely the chess board structure, run the program in gdb and breakpoint somewhere when rax gets set as a pointer to the board. Without ASLR on, a command for that in GDB is  
-**break *(0x555555554000+0x1BA6)**  
+From the information gathered in the previous section, and the knowledge of a large section of memory on the stack that is most likely the chess board structure, run the program in `gdb` and breakpoint somewhere when `rax` gets set as a pointer to the board. Without ASLR on, a command for that in GDB is  
+`break *(0x555555554000+0x1BA6)`  
 
-After breaking and locating the address, since we know the size of the structure you can easily print out the hex with the GDB command x/128xg where 128 is the number of 8 byte hex values to print from the address passed. 
+After breaking and locating the address, since we know the size of the structure you can easily print out the hex with the GDB command `x/256xw` where 256 is the number of 4 byte hex values to print from the address passed. 
 
 >x/256xw 0x7fffffffdde0
 
@@ -120,7 +120,7 @@ The patterns are pretty obvious to see, but for example this is the layout I not
 0x7fffffffe130:	0x00000005(piece_type)	0x00000001(side)	0x00000006(position_y)	0x00000005(position_x)
 ```
 
-With a structure laid out and known we can create a struct in the local types view for IDA, and my structures are as seen below.
+With a structure laid out and known we can create a struct in the `local types view` for IDA, and my structures are as seen below.
 
 ```cpp
 struct struct_piece
@@ -138,10 +138,10 @@ struct struct_board
 };
 ```
 
-board->whosturn is used to figure out which side's turn it is, and is toggled between 1 and 0 during the execution of the program whenever a turn is finished.  
+`board->whosturn` is used to figure out which side's turn it is, and is toggled between `1` and `0` during the execution of the program whenever a turn is finished.  
 
 Now that a structure is laid out in IDA, any time the board is used it will show a more relevant and understandable piece of information in the decompiler as long as you set the var type.  
-The checkwin function makes more sense here, both the get_piece_type and get_piece_side functions are simple functions that just retrieve the type or side from the piece. And the piece type is used to determine what calculation to do based on the position on the board for that specific piece type. I took the liberty of commenting what the functions do as they are simple and it would be tedious, feel free to download and look into it if you need to.
+The `checkwin` function makes more sense here, both the `get_piece_type` and `get_piece_side` functions are simple functions that just retrieve the type or side from the piece. And the `piece type` is used to determine what calculation to do based on the position on the board for that specific piece type. I took the liberty of commenting what the functions do as they are simple and it would be tedious, feel free to download and look into it if you need to.
 ```cpp
 __int64 __fastcall f_checkwin(struct_board *board)
 {
@@ -188,11 +188,11 @@ __int64 __fastcall f_checkwin(struct_board *board)
 
 ## Creating a Z3 script to calculate a correct path
 
-Knowing the path to win, and the mathematical requirements, I did not want to go through it manually so I enlisted the help of my teammate kosinw for the Z3 side of the challenge. The final script for reference is avaliable [here](/assets/files/chezzz.py). 
+Knowing the path to win, and the mathematical requirements, I did not want to go through it manually so I enlisted the help of my teammate kosinw for the `Z3` side of the challenge. The final script for reference is avaliable [here](/assets/files/chezzz.py). 
 
-It sets up the board with an 8x8 array of integers, limiting the values for each piece to 0 to 6 and restricting the number of existing pieces depending on the settings. It also limits the game by the rules that exist, which for some reason that is just up to the developer, is that kings are unmovable.  
-Then the script implements restrictions for the type of piece and what calculation needs to be done for that specific piece, and restricts it to equal 467.  
-An example from the final script is shown, with all the pieces in place for the required patterns to generate 467:  
+It sets up the board with an `8x8` array of integers, limiting the values for each piece to `0` to `6` and restricting the number of existing pieces depending on the settings. It also limits the game by the rules that exist, which for some reason that is just up to the developer, is that kings are unmovable.  
+Then the script implements restrictions for the type of piece and what calculation needs to be done for that specific piece, and restricts it to equal `467`.  
+An example from the final script is shown, with all the pieces in place for the required patterns to generate `467`:  
 
 ```
 _ _ Q _ K _ _ _
